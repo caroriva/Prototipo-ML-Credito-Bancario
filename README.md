@@ -1,85 +1,65 @@
-# Sistema ML para Clasificación de Otorgamiento de Crédito Bancario
+# TP1 — Análisis Exploratorio de Datos: Dataset de Crédito
 
-Las entidades financieras reciben diariamente miles de solicitudes de crédito que deben ser analizadas manualmente, lo que consume tiempo, recursos y puede generar demoras en la respuesta al cliente.
+**Primera entrega del Proyecto Integrador**  
+Materia: Ciencia de Datos
 
-Este sistema de Machine Learning Supervisado tiene como objetivo automatizar y optimizar el proceso de evaluación inicial de solicitudes de crédito bancario, mediante el análisis de datos financieros y personales del solicitante.
+---
 
-El modelo predice si una solicitud debe ser:
+## Objetivo
 
-- **Aprobada**
-- **Rechazada**
-- **Revisión Manual**
+Explorar un dataset de solicitudes de crédito bancario para identificar los factores socioeconómicos y demográficos que más influyen en la aprobación de un crédito, detectar problemas de calidad de datos y sentar las bases para un modelo predictivo futuro.
 
-Además, el sistema puede considerar variables como:
+---
 
-- Historial crediticio
-- Nivel de ingresos
-- Antigüedad laboral
-- Edad
-- Nivel de endeudamiento
-- Cantidad de créditos previos
-- Mora o incumplimientos anteriores
-- Tipo de empleo
-- Relación cuota / ingreso
+## Estructura del proyecto
 
-## Beneficios del Sistema
+```
+TP1_Credito/
+├── data/
+│   └── credito-dataset.csv       # Dataset original (separador: ;)
+├── notebook/
+│   └── TP1_EDA_Credito.ipynb     # Notebook principal con todo el análisis
+└── README.md                     # Este archivo
+```
 
-- Reducción del tiempo de análisis crediticio.
-- Mayor objetividad en decisiones.
-- Disminución de errores humanos.
-- Escalabilidad para miles de solicitudes.
-- Apoyo al área de Riesgo Crediticio.
-
-## Destinado a:
-
-- Bancos
-- Fintechs
-- Cooperativas de crédito
-- Empresas financieras
-- Organizaciones que otorgan préstamos personales
-
-## Solución Propuesta
-
-Se desarrollará un modelo de clasificación supervisada utilizando algoritmos como:
-
-- Logistic Regression
-- Random Forest
-- XGBoost
-- Decision Tree
-
-El sistema permitirá ingresar los datos del solicitante y obtener una predicción automática con probabilidad de aprobación.
+---
 
 ## Dataset
 
-Se trabajará con un dataset de 438.557 registros y 21 variables, compuesto por información realista de clientes bancarios.
+- **Fuente:** Dataset de solicitudes de crédito bancario
+- **Registros:** 438.557
+- **Variables:** 21 (20 predictoras + 1 variable objetivo `APPROVED`)
+- **Separador:** punto y coma (`;`)
 
-### Variables principales:
+### Variables principales
 
-### Datos Personales
-- Género
-- Edad
-- Estado civil
-- Cantidad de hijos
-- Tamaño familiar
+| Variable              | Descripción                                    |
+| --------------------- | ---------------------------------------------- |
+| `AMT_INCOME_TOTAL`    | Ingreso anual del solicitante                  |
+| `AGE`                 | Edad en años                                   |
+| `YEARS_EMPLOYED`      | Antigüedad laboral en años                     |
+| `NAME_EDUCATION_TYPE` | Nivel educativo                                |
+| `CODE_GENDER`         | Género                                         |
+| `APPROVED`            | Variable objetivo: 1 = aprobado, 0 = rechazado |
 
-### Perfil Económico
-- Ingreso total anual
-- Tipo de ingreso
-- Antigüedad laboral
+---
 
-### Patrimonio
-- Propiedad inmobiliaria
-- Vehículo propio
-- Tipo de vivienda
+## Preguntas de investigación
 
-### Contactabilidad
-- Email
-- Teléfono
-- Teléfono laboral
+1. ¿Cuál es la tasa de aprobación por género?
+2. ¿El ingreso influye en la aprobación?
+3. ¿La antigüedad laboral se relaciona con la aprobación?
+4. ¿El nivel educativo afecta la tasa de aprobación?
+5. ¿Existen anomalías o valores atípicos relevantes?
 
-### Perfil Laboral
-- Ocupación del solicitante
+---
 
-## GRUPO 14:
-- Ariel Escalante
-- Carolina Rivarola
+## Principales hallazgos
+
+- La **antigüedad laboral** es el predictor más fuerte (correlación 0.54 con la aprobación).
+- El **ingreso** y el **nivel educativo** también muestran relación positiva con la aprobación.
+- La **edad** tiene relación negativa: solicitantes más jóvenes son aprobados con mayor frecuencia.
+- Se detectó un **valor centinela** en `DAYS_EMPLOYED = 365243` que codifica pensionados (17.2% del dataset).
+- `OCCUPATION_TYPE` presenta **30.6% de valores nulos**.
+
+---
