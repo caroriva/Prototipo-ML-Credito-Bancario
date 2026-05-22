@@ -1,65 +1,85 @@
-# TP1 — Análisis Exploratorio de Datos: Dataset de Crédito
+# Sistema ML para Clasificación de Otorgamiento de Crédito Bancario
 
-**Primera entrega del Proyecto Integrador**  
-Materia: Ciencia de Datos
+Las entidades financieras reciben diariamente miles de solicitudes de crédito que deben analizarse manualmente, evaluando múltiples variables económicas, laborales y personales del cliente.
 
----
+Este proyecto de Machine Learning Supervisado tiene como objetivo automatizar la pre-evaluación crediticia mediante un modelo predictivo capaz de estimar si una solicitud debe ser aprobada o rechazada.
 
-## Objetivo
+## Problema que Resuelve
 
-Explorar un dataset de solicitudes de crédito bancario para identificar los factores socioeconómicos y demográficos que más influyen en la aprobación de un crédito, detectar problemas de calidad de datos y sentar las bases para un modelo predictivo futuro.
+El análisis manual de solicitudes genera:
 
----
+- Demoras en la respuesta al cliente.
+- Costos operativos elevados.
+- Riesgo de subjetividad humana.
+- Saturación del equipo de análisis crediticio.
 
-## Estructura del proyecto
+Nuestro sistema propone una solución inteligente basada en datos históricos.
 
-```
-TP1_Credito/
-├── data/
-│   └── credito-dataset.csv       # Dataset original (separador: ;)
-├── notebook/
-│   └── TP1_EDA_Credito.ipynb     # Notebook principal con todo el análisis
-└── README.md                     # Este archivo
-```
+## Variable Objetivo
 
----
+El modelo predice:
 
-## Dataset
+- **APPROVED = 1** → Crédito Aprobado
+- **APPROVED = 0** → Crédito Rechazado
 
-- **Fuente:** Dataset de solicitudes de crédito bancario
-- **Registros:** 438.557
-- **Variables:** 21 (20 predictoras + 1 variable objetivo `APPROVED`)
-- **Separador:** punto y coma (`;`)
+## Dataset Utilizado
 
-### Variables principales
+Se trabajará con un dataset de **438.557 registros y 21 variables**, compuesto por información realista de clientes bancarios.
 
-| Variable              | Descripción                                    |
-| --------------------- | ---------------------------------------------- |
-| `AMT_INCOME_TOTAL`    | Ingreso anual del solicitante                  |
-| `AGE`                 | Edad en años                                   |
-| `YEARS_EMPLOYED`      | Antigüedad laboral en años                     |
-| `NAME_EDUCATION_TYPE` | Nivel educativo                                |
-| `CODE_GENDER`         | Género                                         |
-| `APPROVED`            | Variable objetivo: 1 = aprobado, 0 = rechazado |
+### Variables principales:
 
----
+### Datos Personales
+- Género
+- Edad
+- Estado civil
+- Cantidad de hijos
+- Tamaño familiar
 
-## Preguntas de investigación
+### Perfil Económico
+- Ingreso total anual
+- Tipo de ingreso
+- Antigüedad laboral
 
-1. ¿Cuál es la tasa de aprobación por género?
-2. ¿El ingreso influye en la aprobación?
-3. ¿La antigüedad laboral se relaciona con la aprobación?
-4. ¿El nivel educativo afecta la tasa de aprobación?
-5. ¿Existen anomalías o valores atípicos relevantes?
+### Patrimonio
+- Propiedad inmobiliaria
+- Vehículo propio
+- Tipo de vivienda
 
----
+### Contactabilidad
+- Email
+- Teléfono
+- Teléfono laboral
 
-## Principales hallazgos
+### Perfil Laboral
+- Ocupación del solicitante
 
-- La **antigüedad laboral** es el predictor más fuerte (correlación 0.54 con la aprobación).
-- El **ingreso** y el **nivel educativo** también muestran relación positiva con la aprobación.
-- La **edad** tiene relación negativa: solicitantes más jóvenes son aprobados con mayor frecuencia.
-- Se detectó un **valor centinela** en `DAYS_EMPLOYED = 365243` que codifica pensionados (17.2% del dataset).
-- `OCCUPATION_TYPE` presenta **30.6% de valores nulos**.
+## Beneficios del Sistema
 
----
+- Reducción del tiempo de análisis crediticio.
+- Mayor objetividad en decisiones.
+- Disminución de errores humanos.
+- Escalabilidad para miles de solicitudes.
+- Apoyo al área de Riesgo Crediticio.
+
+## Modelo Principal
+
+- Random Forest
+
+## Stack Tecnológico
+
+- Python
+- Google Colab
+- Pandas
+- NumPy
+- Matplotlib / Seaborn
+- Scikit-learn
+- GitHub
+- Streamlit (avance futuro)
+
+
+## GRUPO 14
+
+- Ariel Escalante
+- Carolina Rivarola
+- Natalia Peloc 
+- Federico Lemos
