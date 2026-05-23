@@ -1,0 +1,22 @@
+{
+  "Random Forest": {
+    "modelo": "Random Forest",
+    "accuracy": 0.9351,
+    "f1_macro": 0.9234,
+    "f1_clase0": 0.8935,
+    "f1_clase1": 0.9534,
+    "precision": 0.9131,
+    "recall": 0.9362,
+    "roc_auc": 0.9859
+  },
+  "XGBoost": {
+    "modelo": "XGBoost",
+    "accuracy": 0.9403,
+    "f1_macro": 0.9292,
+    "f1_clase0": 0.9012,
+    "f1_clase1": 0.9572,
+    "precision": 0.9201,
+    "recall": 0.94,
+    "roc_auc": 0.9887
+  }
+}
