@@ -316,13 +316,12 @@ Por eso priorizamos:
 
 - **F1-Macro**: promedio entre F1 de aprobados y rechazados. Penaliza si el modelo ignora alguna clase.
 - **ROC-AUC**: mide la capacidad discriminativa general del modelo (1.0 = perfecto, 0.5 = aleatorio).
-- **F1 Clase 0**: el modelo debe detectar bien los rechazos para proteger a la entidad financiera.
 
-**¿Cuándo falla el modelo?**
+**¿Cuándo puede fallar el modelo?**
 
-- Perfiles atípicos sin antecedentes similares en el dataset de entrenamiento.
-- Pensionados con ingresos altos (subrepresentados en el dataset).
-- Clientes con `OCCUPATION_TYPE` desconocida (30% del dataset original).
+- Perfiles muy poco frecuentes en los datos históricos: el modelo aprende de ejemplos, si nunca vio muchos casos similares, puede equivocarse.
+- Jubilados con ingresos altos: hay pocos casos así en el dataset, por lo que el modelo tiene menos experiencia evaluando ese perfil.
+- Clientes sin información de ocupación: el 30% del dataset original no tenía ese dato, lo que limita la precisión en esos casos.
         """)
 
 # ═══════════════════════════════════════════════════════
@@ -345,7 +344,7 @@ Datos e IA Aplicada — **UPATECO, Salta, 2026**.
 Las entidades financieras analizan manualmente miles de solicitudes de crédito,
 generando demoras, costos operativos elevados y riesgo de subjetividad.
 Este sistema automatiza la **pre-evaluación** usando un modelo predictivo entrenado
-sobre 90.085 solicitudes históricas únicas.
+sobre 438.557 solicitudes históricas de clientes bancarios.
 
 ---
 
@@ -353,9 +352,9 @@ sobre 90.085 solicitudes históricas únicas.
 
 | Etapa | Descripción |
 |-------|-------------|
-| **Datos** | CSV con 438.557 registros → deduplicados a 90.085 únicos |
+| **Datos** | CSV con 438.557 registros y 21 variables |
 | **EDA** | Análisis exploratorio: distribución de clases, nulos, outliers |
-| **Preprocesamiento** | Imputación, encoding, feature engineering |
+| **Preprocesamiento** | Tratamiento de datos faltantes, encoding, feature engineering |
 | **Modelo** | Random Forest + XGBoost comparados con métricas completas |
 | **Evaluación** | F1-Macro, ROC-AUC, Matriz de Confusión |
 | **Aplicación** | Esta app Streamlit de acceso local |
