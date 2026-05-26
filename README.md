@@ -69,18 +69,9 @@ En la evaluación comparativa contra Random Forest, XGBoost obtuvo mejores resul
 | Accuracy      |    0.9351     | **0.9403** |
 | F1-Macro      |    0.9234     | **0.9292** |
 | ROC-AUC       |    0.9859     | **0.9887** |
-| F1 Rechazados |     0.89      |  **0.90**  |
 
 Además, `scale_pos_weight` maneja el desbalance de clases nativamente sin necesidad
 de remuestreo manual.
-
-### Modelos descartados
-
-| Modelo               | Motivo                                                        |
-| -------------------- | ------------------------------------------------------------- |
-| Logistic Regression  | Asume relaciones lineales; limitado con variables categóricas |
-| Decision Tree simple | Alta varianza, propenso a overfitting sin ensembling          |
-| SVM                  | No escala bien a 400k+ registros en tiempo razonable          |
 
 ---
 
@@ -99,7 +90,6 @@ Dado el desbalance de clases, accuracy sola no es suficiente. Métricas principa
 
 - **F1-Macro** — equilibra precision y recall entre ambas clases
 - **ROC-AUC** — capacidad discriminativa general del modelo
-- **F1 Clase 0 (Rechazados)** — crítico para proteger a la entidad financiera
 - **Matriz de confusión** — análisis de falsos positivos y negativos
 
 ---
