@@ -72,7 +72,7 @@ st.sidebar.markdown("**UPATECO · 2026**")
 st.sidebar.markdown("---")
 page = st.sidebar.radio(
     "Navegación",
-    ["🔍 Evaluación Individual", "📊 Métricas del Modelo",
+    ["🔍 Evaluación Individual",
      "📋 Evaluación Completa y Comunicación de Resultados", "ℹ️ Sobre el Sistema"]
 )
 st.sidebar.markdown("---")
@@ -365,62 +365,7 @@ if page == "🔍 Evaluación Individual":
         )
 
 # ═══════════════════════════════════════════════════════
-# PÁGINA 2 — MÉTRICAS
-# ═══════════════════════════════════════════════════════
-elif page == "📊 Métricas del Modelo":
-    st.title("📊 Métricas de Evaluación del Modelo")
-    st.markdown(
-        "Resultados obtenidos en el conjunto de test (20% de los datos, ~87.711 registros)."
-    )
-
-    if metrics:
-        tab_names = list(metrics.keys())
-        tabs = st.tabs(tab_names)
-        for tab, name in zip(tabs, tab_names):
-            m = metrics[name]
-            with tab:
-                c1, c2, c3, c4 = st.columns(4)
-                c1.metric("Accuracy",  f"{m['accuracy']:.2%}")
-                c2.metric("F1 Macro",  f"{m['f1_macro']:.2%}")
-                c3.metric("ROC-AUC",   f"{m['roc_auc']:.4f}")
-                c4.metric("F1 Clase 0\n(Rechazado)", f"{m['f1_clase0']:.2%}")
-
-    st.markdown("---")
-    st.subheader("Comparación visual de modelos")
-    img_eval = os.path.join(REPORTS_DIR, 'evaluacion_modelos.png')
-    if os.path.exists(img_eval):
-        st.image(img_eval, use_container_width=True)
-    else:
-        st.warning("Imagen no encontrada. Ejecutá primero el notebook de entrenamiento.")
-
-    st.markdown("---")
-    st.subheader("Importancia de variables — Random Forest")
-    img_feat = os.path.join(REPORTS_DIR, 'feature_importance.png')
-    if os.path.exists(img_feat):
-        st.image(img_feat, use_container_width=True)
-
-    st.markdown("---")
-    with st.expander("📖 Interpretación de métricas"):
-        st.markdown("""
-**¿Por qué no usamos solo Accuracy?**
-
-El dataset tiene desbalance de clases: 72,9% aprobados vs 27,1% rechazados.
-Un modelo que prediga siempre "Aprobado" obtendría 72,9% de accuracy sin aprender nada.
-Por eso priorizamos:
-
-- **F1-Macro**: promedio entre F1 de aprobados y rechazados. Penaliza si el modelo ignora alguna clase.
-- **ROC-AUC**: mide la capacidad discriminativa general del modelo (1.0 = perfecto, 0.5 = aleatorio).
-- **F1 Clase 0**: el modelo debe detectar bien los rechazos para proteger a la entidad financiera.
-
-**¿Cuándo puede fallar el modelo?**
-
-- Perfiles muy poco frecuentes en los datos históricos: el modelo aprende de ejemplos, si nunca vio muchos casos similares, puede equivocarse.
-- Jubilados con ingresos altos: hay pocos casos así en el dataset, por lo que el modelo tiene menos experiencia evaluando ese perfil.
-- Clientes sin información de ocupación: el 30% del dataset original no tenía ese dato, lo que limita la precisión en esos casos.
-        """)
-
-# ═══════════════════════════════════════════════════════
-# PÁGINA 3 — AVANCE 4 (con explicabilidad)
+# PÁGINA 2 — AVANCE 4 (con explicabilidad)
 # ═══════════════════════════════════════════════════════
 elif page == "📋 Evaluación Completa y Comunicación de Resultados":
     st.title("📋 Evaluación Completa y Comunicación de Resultados")
@@ -574,7 +519,7 @@ Devuelve una recomendación con nivel de confianza y **explica qué variables pe
     st.caption("Evaluación Completa con Explicabilidad · Modelado de Sistemas de IA Aplicada · UPATECO · 2026")
 
 # ═══════════════════════════════════════════════════════
-# PÁGINA 4 — SOBRE EL SISTEMA
+# PÁGINA 3 — SOBRE EL SISTEMA
 # ═══════════════════════════════════════════════════════
 elif page == "ℹ️ Sobre el Sistema":
     st.title("ℹ️ Sobre el Sistema")
